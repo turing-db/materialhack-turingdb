@@ -1,0 +1,12 @@
+id,name,smiles,inchikey,kegg,chebi,role,is_monomer
+cpd_glucose,D-Glucose,OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@@H]1O,WQZGKKKJIJFFOK-VFUOTHLCSA-N,C00031,17634,feedstock,false
+cpd_pyruvate,Pyruvate,CC(=O)C(=O)O,LCTONWCANYUPML-UHFFFAOYSA-N,C00022,15361,intermediate,false
+cpd_accoa,Acetyl-CoA,,,C00024,15351,intermediate,false
+cpd_aacoa,Acetoacetyl-CoA,,,C00332,15345,intermediate,false
+cpd_3hbcoa,(R)-3-Hydroxybutanoyl-CoA,,,,,intermediate,false
+cpd_3hb,(R)-3-Hydroxybutanoic acid,C[C@@H](O)CC(=O)O,WHBMMWSBFZVSSR-GSVOUGTGSA-N,C01089,,monomer,true
+cpd_lactate,(S)-Lactic acid,C[C@H](O)C(=O)O,JVTAAEKCZFNVCJ-REOHCLBHSA-N,C00186,422,monomer,true
+cpd_succinate,Succinic acid,O=C(O)CCC(=O)O,KDYFGRWQOYBRFD-UHFFFAOYSA-N,C00042,15741,monomer,true
+cpd_glycolate,Glycolic acid,O=C(O)CO,AEMRFAOFKBGASW-UHFFFAOYSA-N,C00160,17497,monomer,true
+cpd_coa,Coenzyme A,,,C00010,15346,cofactor,false
+cpd_nadph,NADPH,,,C00005,16474,cofactor,false

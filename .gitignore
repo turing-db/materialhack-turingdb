@@ -1,0 +1,26 @@
+# Real source data is gated/large and must not be committed (see README + NOTICE).
+*.db
+*.sqlite
+retrorules*.db
+PoLyInfo*
+*.zip
+*.gz
+
+# Raw external dumps (RetroRules / MetaNetX chem_prop + reac_prop) — hundreds of
+# MB and mixed upstream licences. Never commit these.
+data/external/
+
+# ...but DO commit the small derived slice produced by expand_from_retrorules.py:
+!data/retrorules_expanded/
+!data/retrorules_expanded/**
+
+# The full million-node build (data/expand_from_retrorules.py --full) is ~1GB+
+# of APOC JSONL — generated locally, never committed.
+data/retrorules_full/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.uv/

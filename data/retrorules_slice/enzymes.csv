@@ -1,0 +1,6 @@
+id,name,ec,gene,organism,uniprot
+enz_pdh,Pyruvate dehydrogenase complex,1.2.4.1,aceE,Escherichia coli,P0AFG8
+enz_phaA,Beta-ketothiolase (PhaA),2.3.1.9,phaA,Cupriavidus necator,P14611
+enz_phaB,Acetoacetyl-CoA reductase (PhaB),1.1.1.36,phaB,Cupriavidus necator,P14697
+enz_phaC,PHA synthase (PhaC),2.3.1.-,phaC,Cupriavidus necator,P23608
+enz_ldh,L-lactate dehydrogenase,1.1.1.27,ldhA,Escherichia coli,P52643

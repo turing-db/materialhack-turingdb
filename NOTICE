@@ -1,0 +1,44 @@
+NOTICE — Third-party data attribution
+======================================
+
+The biomaterials graph in this repository is derived in part from open
+scientific datasets. The small derived slice committed under
+`data/retrorules_expanded/` (and the curated seed under
+`data/retrorules_slice/`) incorporates information from the sources below.
+The large raw source dumps themselves live under `data/external/` and are NOT
+committed (see `.gitignore`); download them from the providers directly.
+
+Each source is used under its own licence. Attribution and licences:
+
+RetroRules (https://retrorules.org)
+    Reaction rules / templates (RetroRules v3.0.0, MetaNetX-derived export).
+    Duigou T., du Lac M., Carbonell P., Faulon J-L. "RetroRules: a database of
+    reaction rules for engineering biology." Nucleic Acids Research, 2019.
+    Licence: Creative Commons Attribution (CC-BY 4.0). RetroRules aggregates
+    upstream content whose original licences continue to apply.
+
+MetaNetX / MNXref (https://www.metanetx.org)
+    Compound and reaction properties (chem_prop / reac_prop, MNXref v4.5).
+    Moretti S. et al. "MetaNetX/MNXref: unified namespace for metabolites and
+    biochemical reactions in the context of metabolic models." Nucleic Acids
+    Research. Copyright 2011 SystemsX, SIB Swiss Institute of Bioinformatics.
+    Licence: Creative Commons Attribution (CC-BY 4.0). MNXref reconciles content
+    from external resources whose original licensing restrictions still apply
+    (see https://www.metanetx.org/mnxdoc/mnxref.html).
+
+Rhea (https://www.rhea-db.org)
+    Reaction identifiers / equations reconciled into MNXref.
+    Licence: Creative Commons Attribution (CC-BY 4.0).
+
+ChEBI (https://www.ebi.ac.uk/chebi)
+    Chemical entity identifiers and structures.
+    Licence: Creative Commons Attribution (CC-BY 4.0).
+
+UniProt (https://www.uniprot.org)
+    Enzyme / protein accessions referenced via EC numbers.
+    Licence: Creative Commons Attribution (CC-BY 4.0).
+
+If you redistribute the derived slice, retain this NOTICE and cite the sources
+above. The raw MetaNetX/RetroRules dumps under `data/external/` may carry
+additional upstream licence terms and should be obtained from their providers
+rather than redistributed from here.

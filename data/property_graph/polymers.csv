@@ -1,0 +1,7 @@
+id,name,abbrev,psmiles,monomer_id,tg_c,tm_c,tensile_mpa,youngs_gpa,elongation_pct,crystallinity_pct,density,biodegradable,bio_based
+pol_phb,Poly(3-hydroxybutyrate),PHB,*O[C@@H](C)CC(=O)*,cpd_3hb,4,175,40,3.5,5,60,1.25,true,true
+pol_phbv,Poly(3HB-co-3HV),PHBV,*OC(C)CC(=O)*,cpd_3hb,0,150,25,1.2,20,55,1.23,true,true
+pol_pla,Polylactic acid,PLA,*OC(C)C(=O)*,cpd_lactate,58,155,60,3.5,6,40,1.24,true,true
+pol_pga,Polyglycolic acid,PGA,*OCC(=O)*,cpd_glycolate,38,225,90,7.0,15,50,1.53,true,true
+pol_pbs,Polybutylene succinate,PBS,*OCCCCOC(=O)CCC(=O)*,cpd_succinate,-32,114,33,0.6,400,40,1.26,true,true
+pol_pcl,Polycaprolactone,PCL,*OCCCCCC(=O)*,,-60,60,22,0.4,800,45,1.14,true,false

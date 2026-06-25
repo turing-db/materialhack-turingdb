@@ -1,0 +1,7 @@
+id,name,ec,source
+rxn_glyc,Glycolysis (summary): Glucose -> 2 Pyruvate,,summary
+rxn_pdh,Pyruvate -> Acetyl-CoA,1.2.4.1,curated
+rxn_phaA,2 Acetyl-CoA -> Acetoacetyl-CoA,2.3.1.9,curated
+rxn_phaB,Acetoacetyl-CoA -> (R)-3-Hydroxybutanoyl-CoA,1.1.1.36,curated
+rxn_phaC,(R)-3-Hydroxybutanoyl-CoA -> 3-Hydroxybutyrate (PHB monomer),2.3.1.-,curated
+rxn_ldh,Pyruvate -> Lactate,1.1.1.27,curated

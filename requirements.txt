@@ -1,0 +1,6 @@
+# TuringDB Python SDK — https://docs.turingdb.ai/pythonsdk/get_started
+turingdb
+# RDKit — canonical SMILES + InChIKey computation (the join key)
+rdkit
+# CSV/data handling for the build + load scripts
+pandas

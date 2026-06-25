@@ -1,0 +1,7 @@
+id,name,kind,description
+prop_biodeg,Biodegradable,functional,Breaks down under industrial or marine/soil conditions
+prop_heat,Heat resistant,thermal,Melting point above ~150 C; tolerates processing/use heat
+prop_rigid,Rigid,mechanical,"High Young's modulus, low elongation at break"
+prop_flexible,Flexible / elastomeric,mechanical,"Low modulus, high elongation at break"
+prop_crystal,Highly crystalline,thermal,Crystallinity >= 50 percent
+prop_biobased,Bio-based feedstock,functional,Monomer derived from renewable/biological carbon
