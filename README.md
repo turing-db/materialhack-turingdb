@@ -1,3 +1,5 @@
+![MaterialHack x TuringDB](banner.png)
+
 # MaterialHack x TuringDB
 
 A biomanufacturing **knowledge graph for [MaterialHack](https://www.materialhack.co.uk/)**,
