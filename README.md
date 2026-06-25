@@ -73,13 +73,27 @@ python examples/versioning_demo.py
 
 ### Going big — the million-node build
 
-The committed slice is demo-sized. To build the **full metabolic graph** from the
-MetaNetX/RetroRules dumps in `data/external/`:
+The committed slice is demo-sized. The **full metabolic graph** (>1.5M nodes) is
+too large to commit, so it's available two ways:
+
+**A. Download the prebuilt graph** (no source download, no rebuild) from the
+[v1.0 release](https://github.com/turing-db/materialhack-turingdb/releases/tag/v1.0):
+
+```bash
+# slim (512MB, loads on 8GB RAM) — recommended:
+curl -L -o graph.jsonl https://github.com/turing-db/materialhack-turingdb/releases/download/v1.0/graph.jsonl
+# or rich (829MB, SMILES on every compound, needs ~16GB+ RAM): graph_full_props.jsonl
+cp graph.jsonl ~/.turing/data/
+turingdb start -demon
+python load/load_full_jsonl.py --graph biomaterials   # or LOAD JSONL via the SDK
+```
+
+**B. Build it yourself** from the MetaNetX/RetroRules dumps in `data/external/`:
 
 ```bash
 # 1. emit the whole catalogue as an APOC LOAD JSONL file (~1.5M compounds,
 #    ~72k reactions, ~360k edges) into data/retrorules_full/ (git-ignored, ~0.5GB)
-python data/expand_from_retrorules.py --full
+python data/expand_from_retrorules.py --full          # add --rich for full SMILES
 
 # 2. load it into TuringDB via the native bulk path (loads in ~15s)
 turingdb start -demon
