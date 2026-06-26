@@ -17,6 +17,14 @@ The two layers meet at the **monomer compound** (joined on InChIKey), so you can
 ask questions that cross both at once — e.g. *"biodegradable, heat-resistant
 materials whose monomer I can make from a given feedstock."*
 
+> [!IMPORTANT]
+> **The examples and datasets here are guidance, not limits.** This repo is a
+> starting point, not a fixed deliverable. TuringDB can ingest *any* graph — take
+> any open-source dataset, turn it into a TuringDB graph (the scripts in `data/`
+> and `load/` show the pattern, from CSV/Cypher to bulk `LOAD JSONL`), and build
+> whatever project you like on top. The biomaterials graph is just one worked
+> example to get you moving — bring your own data and ideas.
+
 ## What is TuringDB?
 
 [TuringDB](https://docs.turingdb.ai/) is a high-performance, **in-memory
@@ -173,11 +181,19 @@ full scale too.
 This repo commits **only** small, openly-shareable derived data. The raw source
 dumps are large and stay out of git (download them from the providers):
 
-- **RetroRules + MetaNetX/MNXref** — the open flat files (`retrorules_metanetx.csv`,
-  `chem_prop.tsv`, `reac_prop.tsv`) go in `data/external/`. `expand_from_retrorules.py`
-  derives the committed slice in `data/retrorules_expanded/` (and the full build).
-- All sources — **RetroRules, MetaNetX/MNXref, Rhea, ChEBI, UniProt** — are
-  **CC-BY**; see `NOTICE` for attribution. If you redistribute the derived data,
-  keep that attribution.
+The open flat files (`retrorules_metanetx.csv`, `chem_prop.tsv`, `reac_prop.tsv`)
+go in `data/external/`; `expand_from_retrorules.py` derives the committed slice in
+`data/retrorules_expanded/` (and the full build).
 
-See each dataset's README and `schema/SCHEMA.md` for details.
+**Dataset licenses (the two sources used here):**
+
+- **RetroRules v3.0.0** (reaction templates) — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  RetroRules integrates upstream sources (MNXref, Rhea, ChEBI, UniProt, USPTO) that
+  may carry their own terms — *check those before commercial redistribution.*
+- **MetaNetX / MNXref v4.5** (compound & reaction properties) — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
+  © 2011 SystemsX / SIB Swiss Institute of Bioinformatics.
+
+Rhea, ChEBI and UniProt (referenced via the above) are also CC-BY. If you
+redistribute the derived data, keep the attribution — see `NOTICE` for the full
+citations. Dataset and schema details are in each `data/*/README.md` and
+`schema/SCHEMA.md`.
