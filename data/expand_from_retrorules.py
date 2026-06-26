@@ -524,11 +524,47 @@ def load_all_reactions(path):
     return rxn, parts
 
 
+# Properties that must be emitted as JSON numbers / booleans (not strings) so
+# TuringDB types them correctly — otherwise `WHERE p.tm_c >= 150` etc. break.
+_JSON_NUM_KEYS = {
+    "charge", "mass", "score", "radius", "tg_c", "tm_c", "tensile_mpa",
+    "youngs_gpa", "elongation_pct", "crystallinity_pct", "density",
+}
+_JSON_BOOL_KEYS = {
+    "is_monomer", "is_currency", "has_structure", "in_core",
+    "biodegradable", "bio_based",
+}
+
+
+def _num(v):
+    """Coerce to int when integral, else float; None if not numeric."""
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return None
+    return int(f) if f.is_integer() else f
+
+
 def _jprops(d):
-    return {k: v for k, v in d.items() if v not in ("", None)}
+    """Drop empty values; coerce numeric/boolean properties to real JSON
+    numbers/bools so the loaded graph has correct column types."""
+    out = {}
+    for k, v in d.items():
+        if v == "" or v is None:
+            continue
+        if k in _JSON_NUM_KEYS:
+            n = _num(v)
+            if n is not None:
+                out[k] = n
+        elif k in _JSON_BOOL_KEYS:
+            out[k] = v is True or str(v).lower() == "true"
+        else:
+            out[k] = v
+    return out
 
 
-def build_full(out_dir, chem_tsv, reac_tsv, rr_csv, seed_compounds, seed_dir_pg):
+def build_full(out_dir, chem_tsv, reac_tsv, rr_csv, seed_compounds, seed_dir_pg,
+               rich=False, out_name="graph.jsonl"):
     os.makedirs(out_dir, exist_ok=True)
     log("[1/5] all non-transport reactions ...")
     rxn, participants = load_all_reactions(reac_tsv)
@@ -539,7 +575,7 @@ def build_full(out_dir, chem_tsv, reac_tsv, rr_csv, seed_compounds, seed_dir_pg)
     anchors, currency = scan_pass1(chem_tsv, seeds)
     seed_anchor_mnxm = {s["id"]: m for m, s in anchors.items()}
 
-    gpath = os.path.join(out_dir, "graph.jsonl")
+    gpath = os.path.join(out_dir, out_name)
     nid = 0          # APOC node id counter
     rid = 0          # APOC relationship id counter
     idmap = {}       # MNXM -> node id (only for reaction participants + anchors)
@@ -563,11 +599,12 @@ def build_full(out_dir, chem_tsv, reac_tsv, rr_csv, seed_compounds, seed_dir_pg)
             role = ("monomer" if anc else "cofactor" if cur
                     else "intermediate" if struct else "generic")
             core = (mnxm in participants) or bool(anc)
-            # Core compounds (in a reaction) carry the full property set. The
-            # ~1.2M isolated catalogue compounds keep only light identity fields
-            # so the whole 1.5M-node graph fits in memory (heavy columns like
-            # SMILES/formula/mass would otherwise blow past an 8GB box).
-            if core:
+            # Core compounds (in a reaction) always carry the full property set.
+            # The ~1.45M isolated catalogue compounds carry full props only in
+            # --rich mode; by default they keep light identity fields so the whole
+            # 1.5M-node graph fits in memory (heavy columns like SMILES/formula/
+            # mass would otherwise blow past an 8GB box on load).
+            if core or rich:
                 props = {
                     "id": "cpd_" + mnxm, "mnx_id": mnxm,
                     "name": (anc["name"] if anc else name),
@@ -579,9 +616,10 @@ def build_full(out_dir, chem_tsv, reac_tsv, rr_csv, seed_compounds, seed_dir_pg)
                     "kegg": (anc.get("kegg", "") if anc else ""),
                     "role": role,
                     "is_monomer": bool(anc and anc.get("is_monomer") == "true"),
-                    "is_currency": cur, "has_structure": struct, "in_core": True,
+                    "is_currency": cur, "has_structure": struct, "in_core": core,
                 }
-                idmap[mnxm] = nid
+                if core:
+                    idmap[mnxm] = nid
             else:
                 props = {"id": "cpd_" + mnxm, "mnx_id": mnxm, "name": name,
                          "inchikey": ik, "role": role, "is_currency": cur,
@@ -738,6 +776,10 @@ def main():
     ap.add_argument("--hub-threshold", type=int, default=250,
                     help="carbon compounds in more backbone reactions than this "
                          "are not expanded through (keeps the slice from blowing up)")
+    ap.add_argument("--rich", action="store_true",
+                    help="(with --full) keep full properties (SMILES/formula/mass) "
+                         "on ALL compounds incl. the isolated catalogue — bigger file, "
+                         "needs more RAM to load; writes graph_full_props.jsonl")
     args = ap.parse_args()
 
     rr_csv = os.path.join(args.external_dir, "retrorules_metanetx.csv")
@@ -750,8 +792,10 @@ def main():
 
     if args.full:
         out_dir = args.out_dir or os.path.join(ROOT, "data", "retrorules_full")
-        build_full(out_dir, chem_tsv, reac_tsv, rr_csv, args.seed_compounds, seed_pg)
-        log(f"\nDone. Load with:  LOAD JSONL 'graph.jsonl' AS biomaterials_full")
+        out_name = "graph_full_props.jsonl" if args.rich else "graph.jsonl"
+        build_full(out_dir, chem_tsv, reac_tsv, rr_csv, args.seed_compounds, seed_pg,
+                   rich=args.rich, out_name=out_name)
+        log(f"\nDone. Load with:  LOAD JSONL '{out_name}' AS biomaterials_full")
         return
 
     out_dir = args.out_dir or os.path.join(ROOT, "data", "retrorules_expanded")
