@@ -53,29 +53,43 @@ def read_csv(path):
         return list(csv.DictReader(f))
 
 
+# Properties that are genuinely numeric. Everything else (ids, EC numbers, ChEBI
+# ids, formulae, names…) stays a string — TuringDB requires one consistent type
+# per property, and identifiers like EC "1.1" must NOT be coerced to a number.
+NUMERIC_KEYS = {
+    "tg_c", "tm_c", "tensile_mpa", "youngs_gpa", "elongation_pct",
+    "crystallinity_pct", "density", "score", "radius", "charge", "mass",
+}
+
+
 def q(v):
-    """Quote a value as a Cypher literal: strings escaped, numbers/bools bare."""
+    """Quote a value as a Cypher STRING literal (used for ids / EC in MATCH)."""
+    return '"' + str(v).replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def _lit(key, v):
+    """Cypher literal for a property value: bare number for NUMERIC_KEYS, bare
+    bool for true/false, else a quoted string. Returns None for empty values so
+    the caller omits the property (TuringDB CREATE rejects `null` literals)."""
     if v is None or v == "":
-        return "null"
+        return None
     if v in ("true", "false"):
         return v
-    try:
-        float(v)
-        return v
-    except (ValueError, TypeError):
-        return '"' + str(v).replace("\\", "\\\\").replace('"', '\\"') + '"'
+    if key in NUMERIC_KEYS:
+        try:
+            float(v)
+            return str(v)
+        except (TypeError, ValueError):
+            pass
+    return q(v)
 
 
 def props(d, keys):
-    # TuringDB's CREATE rejects `null` property literals — to leave a property
-    # unset you simply omit it. So skip any key whose value is empty/None rather
-    # than emitting `key: null`.
     parts = []
     for k in keys:
-        v = d.get(k)
-        if v is None or v == "":
-            continue
-        parts.append(f"{k}: {q(v)}")
+        lit = _lit(k, d.get(k))
+        if lit is not None:
+            parts.append(f"{k}: {lit}")
     return "{" + ", ".join(parts) + "}"
 
 

@@ -2,17 +2,17 @@
 // Regenerate with: python load/load_graph.py --emit-cypher load/cypher/seed.cypher
 // Nodes first, then edges (load inside a change; COMMIT between the two).
 
-CREATE (:Compound {id: "cpd_glucose", name: "D-Glucose", smiles: "OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@@H]1O", inchikey: "WQZGKKKJIJFFOK-VFUOTHLCSA-N", kegg: "C00031", chebi: 17634, role: "feedstock", is_monomer: false});
-CREATE (:Compound {id: "cpd_pyruvate", name: "Pyruvate", smiles: "CC(=O)C(=O)O", inchikey: "LCTONWCANYUPML-UHFFFAOYSA-N", kegg: "C00022", chebi: 15361, role: "intermediate", is_monomer: false});
-CREATE (:Compound {id: "cpd_accoa", name: "Acetyl-CoA", kegg: "C00024", chebi: 15351, role: "intermediate", is_monomer: false});
-CREATE (:Compound {id: "cpd_aacoa", name: "Acetoacetyl-CoA", kegg: "C00332", chebi: 15345, role: "intermediate", is_monomer: false});
+CREATE (:Compound {id: "cpd_glucose", name: "D-Glucose", smiles: "OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@@H]1O", inchikey: "WQZGKKKJIJFFOK-VFUOTHLCSA-N", kegg: "C00031", chebi: "17634", role: "feedstock", is_monomer: false});
+CREATE (:Compound {id: "cpd_pyruvate", name: "Pyruvate", smiles: "CC(=O)C(=O)O", inchikey: "LCTONWCANYUPML-UHFFFAOYSA-N", kegg: "C00022", chebi: "15361", role: "intermediate", is_monomer: false});
+CREATE (:Compound {id: "cpd_accoa", name: "Acetyl-CoA", kegg: "C00024", chebi: "15351", role: "intermediate", is_monomer: false});
+CREATE (:Compound {id: "cpd_aacoa", name: "Acetoacetyl-CoA", kegg: "C00332", chebi: "15345", role: "intermediate", is_monomer: false});
 CREATE (:Compound {id: "cpd_3hbcoa", name: "(R)-3-Hydroxybutanoyl-CoA", role: "intermediate", is_monomer: false});
 CREATE (:Compound {id: "cpd_3hb", name: "(R)-3-Hydroxybutanoic acid", smiles: "C[C@@H](O)CC(=O)O", inchikey: "WHBMMWSBFZVSSR-GSVOUGTGSA-N", kegg: "C01089", role: "monomer", is_monomer: true});
-CREATE (:Compound {id: "cpd_lactate", name: "(S)-Lactic acid", smiles: "C[C@H](O)C(=O)O", inchikey: "JVTAAEKCZFNVCJ-REOHCLBHSA-N", kegg: "C00186", chebi: 422, role: "monomer", is_monomer: true});
-CREATE (:Compound {id: "cpd_succinate", name: "Succinic acid", smiles: "O=C(O)CCC(=O)O", inchikey: "KDYFGRWQOYBRFD-UHFFFAOYSA-N", kegg: "C00042", chebi: 15741, role: "monomer", is_monomer: true});
-CREATE (:Compound {id: "cpd_glycolate", name: "Glycolic acid", smiles: "O=C(O)CO", inchikey: "AEMRFAOFKBGASW-UHFFFAOYSA-N", kegg: "C00160", chebi: 17497, role: "monomer", is_monomer: true});
-CREATE (:Compound {id: "cpd_coa", name: "Coenzyme A", kegg: "C00010", chebi: 15346, role: "cofactor", is_monomer: false});
-CREATE (:Compound {id: "cpd_nadph", name: "NADPH", kegg: "C00005", chebi: 16474, role: "cofactor", is_monomer: false});
+CREATE (:Compound {id: "cpd_lactate", name: "(S)-Lactic acid", smiles: "C[C@H](O)C(=O)O", inchikey: "JVTAAEKCZFNVCJ-REOHCLBHSA-N", kegg: "C00186", chebi: "422", role: "monomer", is_monomer: true});
+CREATE (:Compound {id: "cpd_succinate", name: "Succinic acid", smiles: "O=C(O)CCC(=O)O", inchikey: "KDYFGRWQOYBRFD-UHFFFAOYSA-N", kegg: "C00042", chebi: "15741", role: "monomer", is_monomer: true});
+CREATE (:Compound {id: "cpd_glycolate", name: "Glycolic acid", smiles: "O=C(O)CO", inchikey: "AEMRFAOFKBGASW-UHFFFAOYSA-N", kegg: "C00160", chebi: "17497", role: "monomer", is_monomer: true});
+CREATE (:Compound {id: "cpd_coa", name: "Coenzyme A", kegg: "C00010", chebi: "15346", role: "cofactor", is_monomer: false});
+CREATE (:Compound {id: "cpd_nadph", name: "NADPH", kegg: "C00005", chebi: "16474", role: "cofactor", is_monomer: false});
 CREATE (:Enzyme {id: "enz_pdh", name: "Pyruvate dehydrogenase complex", ec: "1.2.4.1", gene: "aceE", organism: "Escherichia coli", uniprot: "P0AFG8"});
 CREATE (:Enzyme {id: "enz_phaA", name: "Beta-ketothiolase (PhaA)", ec: "2.3.1.9", gene: "phaA", organism: "Cupriavidus necator", uniprot: "P14611"});
 CREATE (:Enzyme {id: "enz_phaB", name: "Acetoacetyl-CoA reductase (PhaB)", ec: "1.1.1.36", gene: "phaB", organism: "Cupriavidus necator", uniprot: "P14697"});
