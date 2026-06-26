@@ -68,11 +68,28 @@ materialhack-turingdb/
 **Why it's shaped this way.** The committed seed and demo slice are deliberately
 small and fully open, so the repo clones and runs in seconds. Every compound's
 join key is an **RDKit/MetaNetX InChIKey**, so the metabolic and property layers
-resolve to the *same* node. The full ~1.5M-node graph is too large for git, so
-it's a one-command rebuild (or a prebuilt download — see below). Crucially,
-ubiquitous **cofactors** (water, ATP, NAD(P)(H), CoA, quinones…) sit on a
-separate `USES_COFACTOR` edge, so multi-hop traversal follows real carbon
-chemistry instead of teleporting through hubs (details in `schema/SCHEMA.md`).
+resolve to the *same* node. Crucially, ubiquitous **cofactors** (water, ATP,
+NAD(P)(H), CoA, quinones…) sit on a separate `USES_COFACTOR` edge, so multi-hop
+traversal follows real carbon chemistry instead of teleporting through hubs
+(details in `schema/SCHEMA.md`).
+
+### Two graph sizes
+
+Same schema, same join key, same cofactor-aware backbone — the small graph is
+just the big one **zoomed in around the four monomers**.
+
+| | **Small** (demo slice) | **Big** (full graph) |
+|---|---|---|
+| Size | ~17k nodes / ~49k edges | ~1.57M nodes / ~363k edges |
+| Compounds | ~6,075 | ~1,495,668 (~47k in the connected core) |
+| Reactions | ~8,083 (all RetroRules-templated → SMARTS+EC) | ~72,291 (all non-transport; templated where available) |
+| Scope | ~1–2 reaction hops around the 4 monomers | the entire MetaNetX/RetroRules network |
+| Where | committed in `data/retrorules_expanded/` | [v1.0 release](https://github.com/turing-db/materialhack-turingdb/releases/tag/v1.0) (git-ignored locally) |
+| Load | `python load/load_graph.py …` (~70s, Cypher) | `LOAD JSONL` via `load/load_full_jsonl.py` (~15s) |
+| Use it for | quick start, demos, understanding the shape | real coverage, deep multi-hop, scale |
+
+Both carry the same 6 polymers (PHB/PHBV, PLA, PGA, PBS, PCL) and 6 property
+nodes, wired to the monomers — so the cross-layer query works at either size.
 
 ## Example use cases and ideas
 
