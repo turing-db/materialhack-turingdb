@@ -67,8 +67,16 @@ def q(v):
 
 
 def props(d, keys):
-    inner = ", ".join(f"{k}: {q(d.get(k))}" for k in keys)
-    return "{" + inner + "}"
+    # TuringDB's CREATE rejects `null` property literals — to leave a property
+    # unset you simply omit it. So skip any key whose value is empty/None rather
+    # than emitting `key: null`.
+    parts = []
+    for k in keys:
+        v = d.get(k)
+        if v is None or v == "":
+            continue
+        parts.append(f"{k}: {q(v)}")
+    return "{" + ", ".join(parts) + "}"
 
 
 # --------------------------------------------------------------------------

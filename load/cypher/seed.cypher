@@ -1,23 +1,24 @@
-// Auto-generated seed graph for TuringDB biomaterials starter.
+// Auto-generated biomaterials graph for TuringDB.
 // Regenerate with: python load/load_graph.py --emit-cypher load/cypher/seed.cypher
+// Nodes first, then edges (load inside a change; COMMIT between the two).
 
 CREATE (:Compound {id: "cpd_glucose", name: "D-Glucose", smiles: "OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@@H]1O", inchikey: "WQZGKKKJIJFFOK-VFUOTHLCSA-N", kegg: "C00031", chebi: 17634, role: "feedstock", is_monomer: false});
 CREATE (:Compound {id: "cpd_pyruvate", name: "Pyruvate", smiles: "CC(=O)C(=O)O", inchikey: "LCTONWCANYUPML-UHFFFAOYSA-N", kegg: "C00022", chebi: 15361, role: "intermediate", is_monomer: false});
-CREATE (:Compound {id: "cpd_accoa", name: "Acetyl-CoA", smiles: null, inchikey: null, kegg: "C00024", chebi: 15351, role: "intermediate", is_monomer: false});
-CREATE (:Compound {id: "cpd_aacoa", name: "Acetoacetyl-CoA", smiles: null, inchikey: null, kegg: "C00332", chebi: 15345, role: "intermediate", is_monomer: false});
-CREATE (:Compound {id: "cpd_3hbcoa", name: "(R)-3-Hydroxybutanoyl-CoA", smiles: null, inchikey: null, kegg: null, chebi: null, role: "intermediate", is_monomer: false});
-CREATE (:Compound {id: "cpd_3hb", name: "(R)-3-Hydroxybutanoic acid", smiles: "C[C@@H](O)CC(=O)O", inchikey: "WHBMMWSBFZVSSR-GSVOUGTGSA-N", kegg: "C01089", chebi: null, role: "monomer", is_monomer: true});
+CREATE (:Compound {id: "cpd_accoa", name: "Acetyl-CoA", kegg: "C00024", chebi: 15351, role: "intermediate", is_monomer: false});
+CREATE (:Compound {id: "cpd_aacoa", name: "Acetoacetyl-CoA", kegg: "C00332", chebi: 15345, role: "intermediate", is_monomer: false});
+CREATE (:Compound {id: "cpd_3hbcoa", name: "(R)-3-Hydroxybutanoyl-CoA", role: "intermediate", is_monomer: false});
+CREATE (:Compound {id: "cpd_3hb", name: "(R)-3-Hydroxybutanoic acid", smiles: "C[C@@H](O)CC(=O)O", inchikey: "WHBMMWSBFZVSSR-GSVOUGTGSA-N", kegg: "C01089", role: "monomer", is_monomer: true});
 CREATE (:Compound {id: "cpd_lactate", name: "(S)-Lactic acid", smiles: "C[C@H](O)C(=O)O", inchikey: "JVTAAEKCZFNVCJ-REOHCLBHSA-N", kegg: "C00186", chebi: 422, role: "monomer", is_monomer: true});
 CREATE (:Compound {id: "cpd_succinate", name: "Succinic acid", smiles: "O=C(O)CCC(=O)O", inchikey: "KDYFGRWQOYBRFD-UHFFFAOYSA-N", kegg: "C00042", chebi: 15741, role: "monomer", is_monomer: true});
 CREATE (:Compound {id: "cpd_glycolate", name: "Glycolic acid", smiles: "O=C(O)CO", inchikey: "AEMRFAOFKBGASW-UHFFFAOYSA-N", kegg: "C00160", chebi: 17497, role: "monomer", is_monomer: true});
-CREATE (:Compound {id: "cpd_coa", name: "Coenzyme A", smiles: null, inchikey: null, kegg: "C00010", chebi: 15346, role: "cofactor", is_monomer: false});
-CREATE (:Compound {id: "cpd_nadph", name: "NADPH", smiles: null, inchikey: null, kegg: "C00005", chebi: 16474, role: "cofactor", is_monomer: false});
+CREATE (:Compound {id: "cpd_coa", name: "Coenzyme A", kegg: "C00010", chebi: 15346, role: "cofactor", is_monomer: false});
+CREATE (:Compound {id: "cpd_nadph", name: "NADPH", kegg: "C00005", chebi: 16474, role: "cofactor", is_monomer: false});
 CREATE (:Enzyme {id: "enz_pdh", name: "Pyruvate dehydrogenase complex", ec: "1.2.4.1", gene: "aceE", organism: "Escherichia coli", uniprot: "P0AFG8"});
 CREATE (:Enzyme {id: "enz_phaA", name: "Beta-ketothiolase (PhaA)", ec: "2.3.1.9", gene: "phaA", organism: "Cupriavidus necator", uniprot: "P14611"});
 CREATE (:Enzyme {id: "enz_phaB", name: "Acetoacetyl-CoA reductase (PhaB)", ec: "1.1.1.36", gene: "phaB", organism: "Cupriavidus necator", uniprot: "P14697"});
 CREATE (:Enzyme {id: "enz_phaC", name: "PHA synthase (PhaC)", ec: "2.3.1.-", gene: "phaC", organism: "Cupriavidus necator", uniprot: "P23608"});
 CREATE (:Enzyme {id: "enz_ldh", name: "L-lactate dehydrogenase", ec: "1.1.1.27", gene: "ldhA", organism: "Escherichia coli", uniprot: "P52643"});
-CREATE (:Reaction {id: "rxn_glyc", name: "Glycolysis (summary): Glucose -> 2 Pyruvate", ec: null, source: "summary"});
+CREATE (:Reaction {id: "rxn_glyc", name: "Glycolysis (summary): Glucose -> 2 Pyruvate", source: "summary"});
 CREATE (:Reaction {id: "rxn_pdh", name: "Pyruvate -> Acetyl-CoA", ec: "1.2.4.1", source: "curated"});
 CREATE (:Reaction {id: "rxn_phaA", name: "2 Acetyl-CoA -> Acetoacetyl-CoA", ec: "2.3.1.9", source: "curated"});
 CREATE (:Reaction {id: "rxn_phaB", name: "Acetoacetyl-CoA -> (R)-3-Hydroxybutanoyl-CoA", ec: "1.1.1.36", source: "curated"});
@@ -35,22 +36,23 @@ CREATE (:Property {id: "prop_rigid", name: "Rigid", kind: "mechanical", descript
 CREATE (:Property {id: "prop_flexible", name: "Flexible / elastomeric", kind: "mechanical", description: "Low modulus, high elongation at break"});
 CREATE (:Property {id: "prop_crystal", name: "Highly crystalline", kind: "thermal", description: "Crystallinity >= 50 percent"});
 CREATE (:Property {id: "prop_biobased", name: "Bio-based feedstock", kind: "functional", description: "Monomer derived from renewable/biological carbon"});
+
 MATCH (c:Compound {id: "cpd_glucose"}), (r:Reaction {id: "rxn_glyc"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
 MATCH (r:Reaction {id: "rxn_glyc"}), (c:Compound {id: "cpd_pyruvate"}) CREATE (r)-[:PRODUCES]->(c);
 MATCH (c:Compound {id: "cpd_pyruvate"}), (r:Reaction {id: "rxn_pdh"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
-MATCH (c:Compound {id: "cpd_coa"}), (r:Reaction {id: "rxn_pdh"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
+MATCH (r:Reaction {id: "rxn_pdh"}), (c:Compound {id: "cpd_coa"}) CREATE (r)-[:USES_COFACTOR]->(c);
 MATCH (r:Reaction {id: "rxn_pdh"}), (c:Compound {id: "cpd_accoa"}) CREATE (r)-[:PRODUCES]->(c);
 MATCH (c:Compound {id: "cpd_accoa"}), (r:Reaction {id: "rxn_phaA"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
 MATCH (r:Reaction {id: "rxn_phaA"}), (c:Compound {id: "cpd_aacoa"}) CREATE (r)-[:PRODUCES]->(c);
-MATCH (r:Reaction {id: "rxn_phaA"}), (c:Compound {id: "cpd_coa"}) CREATE (r)-[:PRODUCES]->(c);
+MATCH (r:Reaction {id: "rxn_phaA"}), (c:Compound {id: "cpd_coa"}) CREATE (r)-[:USES_COFACTOR]->(c);
 MATCH (c:Compound {id: "cpd_aacoa"}), (r:Reaction {id: "rxn_phaB"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
-MATCH (c:Compound {id: "cpd_nadph"}), (r:Reaction {id: "rxn_phaB"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
+MATCH (r:Reaction {id: "rxn_phaB"}), (c:Compound {id: "cpd_nadph"}) CREATE (r)-[:USES_COFACTOR]->(c);
 MATCH (r:Reaction {id: "rxn_phaB"}), (c:Compound {id: "cpd_3hbcoa"}) CREATE (r)-[:PRODUCES]->(c);
 MATCH (c:Compound {id: "cpd_3hbcoa"}), (r:Reaction {id: "rxn_phaC"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
 MATCH (r:Reaction {id: "rxn_phaC"}), (c:Compound {id: "cpd_3hb"}) CREATE (r)-[:PRODUCES]->(c);
-MATCH (r:Reaction {id: "rxn_phaC"}), (c:Compound {id: "cpd_coa"}) CREATE (r)-[:PRODUCES]->(c);
+MATCH (r:Reaction {id: "rxn_phaC"}), (c:Compound {id: "cpd_coa"}) CREATE (r)-[:USES_COFACTOR]->(c);
 MATCH (c:Compound {id: "cpd_pyruvate"}), (r:Reaction {id: "rxn_ldh"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
-MATCH (c:Compound {id: "cpd_nadph"}), (r:Reaction {id: "rxn_ldh"}) CREATE (c)-[:SUBSTRATE_OF]->(r);
+MATCH (r:Reaction {id: "rxn_ldh"}), (c:Compound {id: "cpd_nadph"}) CREATE (r)-[:USES_COFACTOR]->(c);
 MATCH (r:Reaction {id: "rxn_ldh"}), (c:Compound {id: "cpd_lactate"}) CREATE (r)-[:PRODUCES]->(c);
 MATCH (e:Enzyme {ec: "1.2.4.1"}), (r:Reaction {id: "rxn_pdh"}) CREATE (e)-[:CATALYZES]->(r);
 MATCH (e:Enzyme {ec: "2.3.1.9"}), (r:Reaction {id: "rxn_phaA"}) CREATE (e)-[:CATALYZES]->(r);
