@@ -25,12 +25,20 @@ const ALLOWED_GRAPHS = new Set(
     .filter(Boolean)
 )
 
-// Endpoints that only read metadata — always safe.
-const SAFE_ENDPOINTS = new Set([
+// Read-only REST endpoints the visualizer uses (none of these mutate the graph;
+// the only write vector in TuringDB is /query with mutating Cypher).
+const READ_ENDPOINTS = new Set([
   'list_avail_graphs',
   'list_loaded_graphs',
   'get_graph_status',
   'is_graph_loaded',
+  'list_labels',
+  'list_nodes',
+  'get_nodes',
+  'get_neighbors',
+  'get_edges',
+  'get_node_edges',
+  'explore_node_edges',
 ])
 
 // Cypher write / DDL / transaction clauses, matched as whole words (the
@@ -56,13 +64,14 @@ app.all(/^\/api\/.*/, (req, res) => {
     res.status(403).json({ error: 'read-only', error_details: msg })
   }
 
+  // Any graph-scoped request must target an allowed graph.
+  if (graph && !ALLOWED_GRAPHS.has(graph)) return deny(`graph '${graph}' not allowed`)
+
   if (endpoint === 'query') {
-    if (graph && !ALLOWED_GRAPHS.has(graph)) return deny(`graph '${graph}' not allowed`)
+    // The only write vector — reject mutating Cypher.
     if (WRITE_RE.test(body.toString('utf8')))
       return deny('write / DDL queries are blocked on this public endpoint')
-  } else if (endpoint === 'load_graph') {
-    if (!ALLOWED_GRAPHS.has(graph)) return deny(`graph '${graph}' not allowed`)
-  } else if (!SAFE_ENDPOINTS.has(endpoint)) {
+  } else if (endpoint !== 'load_graph' && !READ_ENDPOINTS.has(endpoint)) {
     return deny(`endpoint '${endpoint}' is not permitted`)
   }
 
