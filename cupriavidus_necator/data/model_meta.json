@@ -1,0 +1,97 @@
+{
+  "name" : "Ascencio2025 - GEM Cupriavidus necator iCNH2025A",
+  "description" : "Our genome-scale metabolic model, iCNH2025A, differs from previously published models of Cupriavidus necator in several important aspects. First, it represents a larger and more extensively curated reconstruction, including 2,737 reactions, 1,803 metabolites, and 1,059 annotated genes, with improved mass and charge balancing, reaction directionality, and gene–protein–reaction associations. Second, the model underwent systematic thermodynamic curation, including the identification and removal of thermodynamically infeasible cycles, which improves the reliability of flux simulations. Third, iCNH2025A incorporates expanded pathways related to PHA biosynthesis, including both PHB and PHBV production routes, whereas earlier models primarily focused on PHB synthesis from sugars. In addition, this model was validated against experimental data obtained in this study, including growth rates, intracellular flux distributions, and PHB production under different cultivation strategies, demonstrating strong agreement with experimental observations.",
+  "format" : {
+    "name" : "COMBINE archive",
+    "identifier" : "OMEX",
+    "version" : "0.1"
+  },
+  "publication" : {
+    "type" : "Publication without link",
+    "journal" : "Journal of Chemical Technology & Biotechnology",
+    "title" : "Integrating fed-batch pulse feeding and flux balance analysis for PHB production by Cupriavidus necator from cassava-based dextrose",
+    "affiliation" : "School of Chemical Engineering, Universidad del Valle, Cali 760042, Colombia; martha.ascencio@correounivalle.edu.co (M.L.A.-G.); david.andres.gomez@correounivalle.edu.co (D.G.-R.)\nInstitute of Clinical Molecular Biology, Kiel University and University Medical Center Schleswig-Holstein, 24105 Kiel, Germany; v.lopez-agudelo@ikmb.uni-kiel.de (V.A.L.A)\nData Analytics and Bioinformatics, Institute of Computer Science, Martin Luther University Halle-Wittenberg, Halle (Saale), Germany; andreas.draeger@informatik.uni-halle.de (A.D)\nTribology, Polymers, Powder Metallurgy and Solid Waste Transformations Research Group, Universidad del Valle, Cali 760042, Colombia; julio.cesar.caicedo@correounivalle.edu.co (J.C.C)\nEscuela de Ingeniería en Biotecnología, Centro de Biotecnología de los Recursos Naturales (Cenbio), Universidad Católica del Maule, Talca 3460000, Chile; randler@ucm.cl (R.A)\n* Correspondence: howard.ramirez@correounivalle.edu.co (H.R-M)",
+    "synopsis" : "Background: The growing demand for biodegradable polymers has positioned polyhydroxybutyrate (PHB) as a sustainable alternative to petrochemical plastics. Microbial synthesis from renewable, low-cost substrates such as cassava starch-derived dextrose offers a promising route, but feeding strategies and metabolic understanding remain critical. This study aimed to evaluate the effect of fed-batch pulse feeding on PHB production by Cupriavidus necator DSM 428 and to integrate experimental results with flux balance analysis (FBA).\n\nResults: Three pulse-feeding strategies were assessed. Two pulses containing carbon and nitrogen at 24 and 48 h (C/N ratio 73) led to 36.87% (w/w) PHB accumulation. A single dextrose-only pulse at 48 h resulted in 25.12% (w/w), A single dextrose-only pulse at 48 h led to 25.12% (w/w), while delaying this pulse to 60 h increased PHB accumulation to 50.40% (w/w). Feeding at the onset of stationary phase enhanced biomass growth but reduced PHB storage, whereas late feeding favored polymer accumulation, likely due to nitrogen limitation. PHB was characterized by XRD, FTIR, SEM, EDS, TGA, and DSC, confirming its expected structural and thermal properties. FBA with iCNH2025A showed strong correlation with experimental data, accurately predicting growth and carbon flux redirection toward PHB synthesis.\n\nConclusion: The integration of fed-batch pulse feeding with FBA provides new insights into the metabolic and process factors driving PHB accumulation from cassava-based substrates. The results highlight the importance of feeding timing for optimizing yields and demonstrate the value of metabolic modeling in guiding sustainable bioprocess design.",
+    "year" : 2026,
+    "month" : "1",
+    "authors" : [
+      {
+        "name" : "Martha L. Ascencio-Galván",
+        "institution" : "Universidad del Valle"
+      },
+      {
+        "name" : "Víctor A. López-Agudelo",
+        "institution" : "Kiel University and University Medical Center Schleswig-Holstein"
+      },
+      {
+        "name" : "Andreas Dräger",
+        "institution" : "Institute of Computer Science, Martin Luther University Halle-Wittenberg"
+      },
+      {
+        "name" : "Julio C. Caicedo",
+        "institution" : "Universidad del Valle"
+      },
+      {
+        "name" : "David Gómez-Ríos",
+        "institution" : "Universidad del Valle"
+      },
+      {
+        "name" : "Rodrigo Andler",
+        "institution" : "Universidad Católica del Maule"
+      },
+      {
+        "name" : "Howard Ramírez-Malule",
+        "institution" : "Universidad del Valle"
+      }
+    ]
+  },
+  "files" : {
+    "main" : [
+      {
+        "name" : "iCNH2025A_Cnecator_GEM.omex",
+        "description" : "iCNH2025A model can represent metabolic scenarios for PHB production using fructose and dextrose derived from cassava starch as a carbon source, predicting growth rates that align with in vivo data. Moreover, it is the first GEM of C. necator that includes the pathway for PHBV copolymer production.",
+        "fileSize" : "433455",
+        "mimeType" : "application/zip",
+        "md5sum" : "544c9acd934a3e87e71fa4bb364f373a",
+        "sha1sum" : "83caca44ca5bed011bf631a48f6246a710526f0c",
+        "sha256sum" : "c589897852fa64a497dd467fb07962e6347c2d2b061ec208bfe78c343ac8a977"
+      }
+    ]
+  },
+  "history" : {
+    "revisions" : [
+      {
+        "version" : 3,
+        "submitted" : 1770919342,
+        "submitter" : "Martha Ligia Ascencio Galvan",
+        "comment" : "Added the modelling approach, renamed the model name and added the information of publication"
+      }
+    ]
+  },
+  "firstPublished" : 1770930066,
+  "submissionId" : "MODEL2502270001",
+  "modellingApproach" : {
+    "accession" : "MAMO_0000009",
+    "name" : "constraint-based model",
+    "resource" : "http://identifiers.org/mamo/MAMO_0000009"
+  },
+  "curationStatus" : "NON_CURATED",
+  "contributors" : {
+    "Curator" : [
+      {
+        "name" : "Martha Ligia Ascencio Galvan",
+        "email" : "martha.ascencio@correounivalle.edu.co",
+        "external" : false
+      }
+    ]
+  },
+  "vcsIdentifier" : "aaj",
+  "modelLevelAnnotations" : [
+    {
+      "qualifier" : "bqmodel:is",
+      "accession" : "MODEL2502270001",
+      "resource" : "BioModels",
+      "uri" : "https://identifiers.org/biomodels.db:MODEL2502270001"
+    }
+  ]
+}

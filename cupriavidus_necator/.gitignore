@@ -1,0 +1,6 @@
+# Extracted SBML (8 MB) — regenerated from the .omex by build_graph.py
+data/model.xml
+
+# Python
+__pycache__/
+*.pyc
