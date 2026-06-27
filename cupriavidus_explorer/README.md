@@ -77,3 +77,27 @@ cupriavidus_explorer/
 
 Upstream is pinned in `setup.sh` (`VIS_COMMIT`); bump it to track newer
 visualizer releases.
+
+## Deploy (Railway / any container host)
+
+`Dockerfile` builds one self-contained image — TuringDB **and** the gated UI:
+
+1. installs TuringDB (via `uv`, pinned Python 3.12);
+2. bakes the `cupriavidus_necator` graph into the image with `turing-parquet`
+   (no running server needed at build time);
+3. clones the pinned visualizer, applies the overlay, builds the SPA;
+4. `start.sh` runs TuringDB in the foreground (supervised background child —
+   **never `-demon`**, with stdin held open so it doesn't exit on EOF) plus the
+   read-only gated server on `$PORT`.
+
+```bash
+# local
+docker build -f cupriavidus_explorer/Dockerfile -t cnec-explorer .
+docker run -p 8080:8080 -e PORT=8080 cnec-explorer
+
+# Railway (railway.json at the repo root points at this Dockerfile)
+railway up && railway domain
+```
+
+Stateless and read-only (no volume needed), ~85 MB RAM. A restart yields a clean
+container from the image — no stale lock.
