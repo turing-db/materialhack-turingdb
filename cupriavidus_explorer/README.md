@@ -34,6 +34,21 @@ All additive — no upstream behaviour removed (`overlay/` mirrors the visualize
 | `src/utils/cnecator-presets.ts` | **New** preset query definitions (PHA/PHB, Calvin cycle, H₂, central metabolism, overview) and the node-label → colour map. |
 | `src/pages/viewer.tsx` | Mounts `<CupriavidusPanel/>`. |
 | `src/stores/app.store.ts` | Defaults the selected graph to `cupriavidus_necator`. |
+| `server.js` | **New** gated production server (see below). |
+
+## Read-only gate (safe to expose publicly)
+
+`run.sh` builds the app and runs `server.js`, which serves the SPA and proxies
+`/api` → TuringDB **behind a read-only gate** so the endpoint can be funneled to
+the public internet without exposing a writable database:
+
+- only the allowed graph(s) may be queried/loaded — `READONLY_GRAPHS` env,
+  default `cupriavidus_necator`;
+- only read-only metadata endpoints are reachable;
+- `/query` bodies containing write/DDL Cypher (`CREATE`, `SET`, `DELETE`,
+  `MERGE`, `REMOVE`, `DROP`, `CHANGE`, `COMMIT`, `LOAD`, …) are rejected with 403.
+
+For local hacking without the gate, use `cd app && npm run dev` (Vite proxy).
 
 ## Using it
 

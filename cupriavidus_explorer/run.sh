@@ -36,5 +36,8 @@ EOF
   fi
 fi
 
-echo "→ Explorer at http://localhost:$TURING_FRONTEND_PORT  (API :$TURING_API_PORT)"
-cd "$APP" && npm run dev
+echo "→ Building the explorer…"
+cd "$APP"
+npm run build
+echo "→ Explorer at http://localhost:$TURING_FRONTEND_PORT  (API :$TURING_API_PORT, read-only gate on /api)"
+exec node server.js   # gated production server (overlay/server.js). For local hacking use: npm run dev
