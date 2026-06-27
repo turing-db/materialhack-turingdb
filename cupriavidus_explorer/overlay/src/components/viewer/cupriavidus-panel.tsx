@@ -78,7 +78,7 @@ export const CupriavidusPanel: FC = () => {
       <button
         type="button"
         onClick={() => setCollapsed(false)}
-        className="bg-grey-800 shadow-dark text-content-primary border-grey-600 pointer-events-auto absolute top-0 left-0 z-10 m-4 flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-medium hover:bg-grey-700"
+        className="bg-grey-800 shadow-dark text-content-primary border-grey-600 pointer-events-auto absolute bottom-0 left-0 z-10 m-4 flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-medium hover:bg-grey-700"
         title="Open the Cupriavidus necator explorer"
       >
         <Icon icon="lab-test" size={14} />
